@@ -568,9 +568,15 @@ void expression() :
 {
 }
 {	
-	[<NOT>]
-    (numexpr() [( <LT> | <GT> | <LE> | <GE> | <EQ> | <NEQ>) numexpr()])
-    ((<AND> | <OR> | <XOR>) [<NOT>] (numexpr() [( <LT> | <GT> | <LE> | <GE> | <EQ> | <NEQ>) numexpr()]))*
+    numexpr() [( <LT> | <GT> | <LE> | <GE> | <EQ> | <NEQ>) numexpr()]
+}
+
+void logicexpression():
+{
+	
+}
+{
+	[<NOT>] expression() [( <AND> | <OR> | <XOR>) [<NOT>] expression()]
 }
 
 void numexpr():
