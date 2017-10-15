@@ -34,56 +34,65 @@ public class calculadora extends calculos{
       return num1 % num2;
    }
 
-  public int comparacao (num1, num2) { // compara os dois numeros e imprime o resultado
-    double list = [num1,num2];
+  public int comparacao (double num1, double num2) { // compara os dois numeros e imprime o resultado
    
     if (num1 != num2){
-      double maiorNumero = 0d;
-      double menorNumero = 0d;
-    
-      for(int i=0;i<1;i=i+1){
-        if(maiorNumero <= list[i]){
-          maiorNumero = list[i];
-        } else if(maiorNumero >= list[i]){
-          menorNumero = list[i];
+      double maiorNumero, menorNumero;
+      maiorNumero = 0.0d;
+      menorNumero = 0.0d;
+      int i;
+
+      for(i=0;i<1;i=i+1){
+        if(num1 < num2){
+        	maiorNumero = num2;
+        	menorNumero = num1;
+        }else {
+        	maiorNumero = num1;
+        	menorNumero = num2;
         }
       }
-      if (menorNumero  < maiorNumero) {
-         print menorNumero +" eh menor que "+ maiorNumero;
-      } else {
-         print menorNumero +" e "+ maiorNumero+" são iguais";
-      }
+      print menorNumero +" eh menor que "+ maiorNumero;
+
       return 0;
-   }
-   return -1;
-   }
+    }else {
+         print menorNumero +" e "+ maiorNumero+" são iguais";
+    }
+    return -1;
+    }
 
 public boolean ambosPositivos(long num1, long num2){
-  return (num1 > 0 && num2 > 0);
+   return;
+  //return (num1 > 0) && (num2 > 0);
   }
 
 public boolean opostoE(boolean val1, boolean val2){
-  return (!val1 && !val2);
+	return;
+  //return (!val1 && !val2);
   }
 
 public boolean algumNegativo(byte num1, byte num2){
-   if(num1 < 0 || num2 < 0){
+   /*if(num1 < 0 || num2 < 0){
       return true;
-}
+}*/
 return false;
 }
 
 public boolean iguaisXorDiferentes(short num1, short num2, short num3, short num4){
-   return ((num1 == num3) ^ (num2 != num4));
+   return;
+   //return ((num1 == num3) ^ (num2 != num4));
  }
 
   public int start(){
-      boolean ehCalculadora = false;
-      char codigo = 'a'
+      boolean ehCalculadora;
+      char codigo;
+      Calculadora calc;
+      ehCalculadora = false;
+      codigo = 'a';
       calc = new calculadora ("Casio", codigo, ehCalculadora);
       double num1, num2;
       int opcao;
-      double total = 0d;
+      double total;
+      total = 0.0d;
       do {
          print "Escolha a operacao:\n";
          print "1 - soma\n";
@@ -101,33 +110,52 @@ public boolean iguaisXorDiferentes(short num1, short num2, short num3, short num
             read num2;
             switch(opcao) {
                case 1:
+               {
                total = calc.soma(num1, num2);
                break;
+               }
                case 2:
+               {
                total = calc.subtracao(num1, num2);
                break;
+               }
                case 3:
+               {
                total = calc.multiplicacao(num1, num2);
                break;
+               }
                case 4:
+               {
                total = calc.divisao(num1, num2);
                break;
+               }
                case 5:
+               {
                total = calc.resto(num1, num2);
                break;
+               }
                case 6:
-               calc.comparacao(num1,num2);
-      default: break;
+               {
+               total = calc.comparacao(num1,num2);
+               break;
+               }
+      		   default: break;
             }
-   if (total > 0) {
+   			if (total > 0) {
                print "Total eh menor que 0:" + total;
             } else if (total == 0) {
-      print "Total eh igual a 0";
-   }
-   print "Total eh maior que 0:" + total;
+      			print "Total eh igual a 0";
+   			}
+   			print "Total eh maior que 0:" + total;
         }
-      } while (opcao != 7);
+      	} (opcao != 7);
       
+      int i;
+      i = 0;
+      while(i < 1){
+      	i = i + 1;
+      }
+
       return 0;   
 
    }

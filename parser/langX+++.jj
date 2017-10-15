@@ -344,6 +344,7 @@ void classbody():
    <LBRACE>
       [LOOKAHEAD(2)classlist()]
       (LOOKAHEAD(3) vardecl() <SEMICOLON>)*
+      (LOOKAHEAD(2) atribstat() <SEMICOLON>)*
       (LOOKAHEAD(2) constructdecl())*
       (methoddecl())* 
    <RBRACE>
@@ -601,7 +602,7 @@ void logicfactor():
 	(
 	<boolean_constant> |
        LOOKAHEAD(3) methodcall() |
-       lvalue() |
+       <IDENT> |
        <LPAREN> expression() <RPAREN>)
 }
 
