@@ -450,14 +450,14 @@ void atribstat():
 {
 }
 {
-    lvalue() <ASSIGN> ( alocexpression() | LOOKAHEAD(3) expression() | methodcall())
+    lvalue() <ASSIGN> ( alocexpression() | LOOKAHEAD(3) expression() | LOOKAHEAD(3) methodcall() | LOOKAHEAD(3) logicexpression())
 }
 
 void printstat():
 {
 }
 {
-    <PRINT> expression()
+    <PRINT> (LOOKAHEAD(3) expression() | logicexpression())
 }
 
 void readstat():
@@ -472,7 +472,7 @@ void returnstat():
 {
 }
 {  
-    <RETURN> [expression()]
+    <RETURN> [LOOKAHEAD(3) expression() | logicexpression()]
 }
 
 
@@ -487,7 +487,7 @@ void ifstat():
 {
 }
 {
-    <IF> <LPAREN> expression() <RPAREN> statement()
+    <IF> <LPAREN> (LOOKAHEAD(3) expression() | logicexpression()) <RPAREN> statement()
     [LOOKAHEAD(2) <ELSE> statement()]
 }
 
@@ -498,7 +498,7 @@ void forstat():
 }
 {
     <FOR> <LPAREN> [atribstat()] <SEMICOLON>
-                   [expression()] <SEMICOLON>
+                   [LOOKAHEAD(3) expression() | logicexpression()] <SEMICOLON>
                    [atribstat()] <RPAREN>
                     statement()
 }
@@ -508,7 +508,7 @@ void whilestat():
 	
 }
 {
-	<WHILE> <LPAREN> expression() <RPAREN> statement()
+	<WHILE> <LPAREN> (LOOKAHEAD(3) expression() | logicexpression()) <RPAREN> statement()
 }
 
 void dowhilestat():
@@ -516,7 +516,7 @@ void dowhilestat():
 	
 }
 {
-	<DO> statement() <LPAREN> expression() <RPAREN>
+	<DO> statement() <LPAREN> (LOOKAHEAD(3) expression() | logicexpression())<RPAREN>
 }
 
 void switchstat():
@@ -590,26 +590,18 @@ void logicunaryexpr() :
 {
 }
 {
-   [(<NOT>] logicfactor()
+   [<NOT>] logicfactor()
 }
 
 void logicfactor():
 {
+	
 }
-{   
-    ( 
-       <int_constant> | 
-       <string_constant> |
-       <boolean_constant> |
-       <char_constant> |
-       <double_constant> |
-       <byte_constant> |
-       <short_constant> |
-       <long_constant> |
-       <float_constant> |
-       <null_constant> |
-       LOOKAHEAD(3) lvalue() |
-       methodcall() |
+{
+	(
+	<boolean_constant> |
+       LOOKAHEAD(3) methodcall() |
+       lvalue() |
        <LPAREN> expression() <RPAREN>)
 }
 
