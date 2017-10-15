@@ -1,10 +1,12 @@
-***********************************************
+/*
+**********************************************
 Esse programa implementa uma calculadora
-*************************************************
+**********************************************
+*/
 
 // adoro compiladores
 
-public class calculadora extend calculos{
+public class calculadora extends calculos{
    protected string @marca;
    private final char @codigo;
 
@@ -14,7 +16,7 @@ public class calculadora extend calculos{
       super(ehCientifica);	
    }
 
-  public float soma(float num1, float num2) {  retorna a soma dos numeros
+  public float soma(float num1, float num2) {  //retorna a soma dos numeros
       return num1 + num2;
    }
 
