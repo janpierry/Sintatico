@@ -9,7 +9,7 @@ public class calculadora extends calculos{
    private final char codigo;
 
  public  constructor (string a, char b, boolean ehCientifica) {
-      nome = a;
+      marca = a;
       codigo = b;
       super(ehCientifica); 
    }
@@ -35,18 +35,19 @@ public class calculadora extends calculos{
    }
 
   public int comparacao (num1, num2) { // compara os dois numeros e imprime o resultado
-   double list = [num1,num2];
+    double list = [num1,num2];
    
-if (num1 != num2){
-   double maiorNumero = 0;
-   double menorNumero = 0;
-   for(int i=0;i<1;i=i+1){
-   if(maiorNumero <= list[i]){
-   maiorNumero = list[i];
-}else if(maiorNumero >= list[i]){
-   menorNumero = list[i];
-}
-}
+    if (num1 != num2){
+      double maiorNumero = 0d;
+      double menorNumero = 0d;
+    
+      for(int i=0;i<1;i=i+1){
+        if(maiorNumero <= list[i]){
+          maiorNumero = list[i];
+        } else if(maiorNumero >= list[i]){
+          menorNumero = list[i];
+        }
+      }
       if (menorNumero  < maiorNumero) {
          print menorNumero +" eh menor que "+ maiorNumero;
       } else {
@@ -58,11 +59,11 @@ if (num1 != num2){
    }
 
 public boolean ambosPositivos(long num1, long num2){
-return (num1 > 0 && num2 > 0);
+  return (num1 > 0 && num2 > 0);
   }
 
 public boolean opostoE(boolean val1, boolean val2){
-return (!val1 && !val2);
+  return (!val1 && !val2);
   }
 
 public boolean algumNegativo(byte num1, byte num2){
@@ -77,10 +78,12 @@ public boolean iguaisXorDiferentes(short num1, short num2, short num3, short num
  }
 
   public int start(){
-      calc = new calculadora ("Casio", "a", false);
+      boolean ehCalculadora = false;
+      char codigo = 'a'
+      calc = new calculadora ("Casio", codigo, ehCalculadora);
       double num1, num2;
       int opcao;
-      double total = 0;
+      double total = 0d;
       do {
          print "Escolha a operacao:\n";
          print "1 - soma\n";

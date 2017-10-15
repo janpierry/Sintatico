@@ -576,7 +576,41 @@ void logicexpression():
 	
 }
 {
-	[<NOT>] expression() [( <AND> | <OR> | <XOR>) [<NOT>] expression()]
+	logicterm() ((<OR> | <XOR>) logicterm())*
+}
+
+void logicterm():
+{
+}
+{
+    logicunaryexpr() ((<AND>) logicunaryexpr())*
+}
+
+void logicunaryexpr() :
+{
+}
+{
+   [(<NOT>] logicfactor()
+}
+
+void logicfactor():
+{
+}
+{   
+    ( 
+       <int_constant> | 
+       <string_constant> |
+       <boolean_constant> |
+       <char_constant> |
+       <double_constant> |
+       <byte_constant> |
+       <short_constant> |
+       <long_constant> |
+       <float_constant> |
+       <null_constant> |
+       LOOKAHEAD(3) lvalue() |
+       methodcall() |
+       <LPAREN> expression() <RPAREN>)
 }
 
 void numexpr():
@@ -601,12 +635,12 @@ void unaryexpr() :
 }
 
 
+
+
 void factor():
 {
 }
-{
-
-    
+{   
     ( 
        <int_constant> | 
        <string_constant> |
