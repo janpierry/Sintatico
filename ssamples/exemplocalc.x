@@ -7,8 +7,8 @@ Esse programa implementa uma calculadora
 public class calculadora extends calculos{
    protected string marca;
    private final char codigo;
-   private int diaEntrega;
-   diaEntrega = 21;
+   private int dia_Entrega;
+   dia_Entrega = 21;
 
  public  constructor (string a, char b, boolean ehCientifica) {
       marca = a;

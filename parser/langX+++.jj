@@ -10,21 +10,21 @@ import java.io.*;
 
 public class langX {
 final static String Version = "X++ Compiler - Version 1.0 - 2004";
-int contParseError = 0;           // contador de erros sint·ticos
+int contParseError = 0;           // contador de erros sint√°ticos
 
 
-// Define o mÈtodo "main" da classe langX.  
+// Define o m√©todo "main" da classe langX.  
   public  static void main(String args[]) throws ParseException 
   {
   boolean debug = false;
 
     String filename = ""; // nome do arquivo a ser analisado
-    langX parser;     // analisador lÈxico/sint·tico
+    langX parser;     // analisador l√©xico/sint√°tico
     int i;
     boolean ms = false;
 
     System.out.println(Version);
-    // lÍ os par‚metros passados para o compilador
+    // l√™ os par√¢metros passados para o compilador
     for (i = 0; i < args.length - 1; i++)
     {
     if (args[i].equals("-debug_AS") )
@@ -37,12 +37,12 @@ int contParseError = 0;           // contador de erros sint·ticos
     }
 
     if (args[i].equals("-"))
-    {       // lÍ da entrada padr„o      
+    {       // l√™ da entrada padr√£o      
         System.out.println("Reading from standard input . . .");
         parser = new langX(System.in); // cria AS
      }
      else 
-    {       // lÍ do arquivo
+    {       // l√™ do arquivo
         filename = args[args.length-1];  
         System.out.println("Reading from file " + filename + " . . .");
         try {  // cria AS
@@ -57,12 +57,12 @@ int contParseError = 0;           // contador de erros sint·ticos
     if (! debug) parser.disable_tracing(); // desabilita verbose do AS
 
     try {
-        parser.program();   // chama o mÈtodo que faz a an·lise
+        parser.program();   // chama o m√©todo que faz a an√°lise
     }
     catch (ParseException e)
     {
     System.err.println(e.getMessage());
-    parser.contParseError = 1;   // n„o existe recuperaÁ„o de erros
+    parser.contParseError = 1;   // n√£o existe recupera√ß√£o de erros
     }
     finally {
         System.out.println(parser.token_source.foundLexError() +
@@ -176,7 +176,7 @@ TOKEN :
 
 TOKEN :
 {
-  < int_constant:(  // n˙meros decimais
+  < int_constant:(  // n√∫meros decimais
                   (["0"-"9"] (["0"-"9"])* )
                  ) >
 |
@@ -201,7 +201,7 @@ TOKEN :
                             (["3"] ["2"] ["7"] ["6"] ["0"-"7"])
   ) >
 |
-  < long_constant: <DIGIT> (<DIGIT>)* ("l" | "L")? >
+  < long_constant: <DIGIT> (<DIGIT>)* ("l" | "L") >
 |
   < float_constant: (<int_constant> "." ( <int_constant> ( ("e" | "E")? ("-")? <int_constant> )? )? | (<int_constant>)? "." <int_constant> (("e" | "E")? ("-")? <int_constant>)? ) ("F" | "f")? >
 
@@ -211,7 +211,7 @@ TOKEN :
 
 TOKEN :
 {
-  < IDENT: <LETTER> (<LETTER> | <DIGIT> | "_")* >
+  < IDENT: <LETTER> (<LETTER>|<DIGIT>|<UNDERLINE>)* >
 |
   < #LETTER:["A"-"Z","a"-"z"] >
 |
@@ -233,6 +233,7 @@ TOKEN :
 | < DOT: "." >
 //mudanca
 | < DOISP: ":" >
+| < UNDERLINE: "_" >
 }
 
 /* Operadores */
@@ -258,7 +259,7 @@ TOKEN :
 | < NOT: "!" >
 }
 
-/* Trata os erros lÈxicos */
+/* Trata os erros l√©xicos */
 SPECIAL_TOKEN :
 {
 <INVALID_LEXICAL: 
@@ -334,7 +335,7 @@ void classdecl():
 {
 }
 {
-   [<PUBLIC> | <PRIVATE> | <PROTECTED>] [<FINAL>] <CLASS>  <IDENT> [ <EXTENDS> <IDENT> ] classbody() 
+   [<PUBLIC> | <PRIVATE> | <PROTECTED>] <CLASS>  <IDENT> [ <EXTENDS> <IDENT> ] classbody() 
 }
 
 void classbody():

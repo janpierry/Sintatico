@@ -117,41 +117,43 @@ public interface langXConstants {
   /** RegularExpression Id. */
   int DOISP = 64;
   /** RegularExpression Id. */
-  int ASSIGN = 65;
+  int UNDERLINE = 65;
   /** RegularExpression Id. */
-  int GT = 66;
+  int ASSIGN = 66;
   /** RegularExpression Id. */
-  int LT = 67;
+  int GT = 67;
   /** RegularExpression Id. */
-  int EQ = 68;
+  int LT = 68;
   /** RegularExpression Id. */
-  int LE = 69;
+  int EQ = 69;
   /** RegularExpression Id. */
-  int GE = 70;
+  int LE = 70;
   /** RegularExpression Id. */
-  int NEQ = 71;
+  int GE = 71;
   /** RegularExpression Id. */
-  int PLUS = 72;
+  int NEQ = 72;
   /** RegularExpression Id. */
-  int MINUS = 73;
+  int PLUS = 73;
   /** RegularExpression Id. */
-  int STAR = 74;
+  int MINUS = 74;
   /** RegularExpression Id. */
-  int SLASH = 75;
+  int STAR = 75;
   /** RegularExpression Id. */
-  int REM = 76;
+  int SLASH = 76;
   /** RegularExpression Id. */
-  int AND = 77;
+  int REM = 77;
   /** RegularExpression Id. */
-  int OR = 78;
+  int AND = 78;
   /** RegularExpression Id. */
-  int XOR = 79;
+  int OR = 79;
   /** RegularExpression Id. */
-  int NOT = 80;
+  int XOR = 80;
   /** RegularExpression Id. */
-  int INVALID_LEXICAL = 81;
+  int NOT = 81;
   /** RegularExpression Id. */
-  int INVALID_CONST = 82;
+  int INVALID_LEXICAL = 82;
+  /** RegularExpression Id. */
+  int INVALID_CONST = 83;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -227,6 +229,7 @@ public interface langXConstants {
     "\",\"",
     "\".\"",
     "\":\"",
+    "\"_\"",
     "\"=\"",
     "\">\"",
     "\"<\"",
