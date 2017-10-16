@@ -61,14 +61,10 @@ public class calculadora extends calculos{
     }
 
 public boolean ambosPositivos(long num1, long num2){  
-    if (num1 > 0 && num2 > 0) {
-      return true;
-    }
-    return false;
+    return num1 > 0 && num2 > 0;
   }
 
 public boolean opostoE(boolean val1, boolean val2){
-	 
     if (!val1){
       if(!val2){
         return true;
@@ -79,18 +75,12 @@ public boolean opostoE(boolean val1, boolean val2){
   }
 
 public boolean algumNegativo(byte num1, byte num2){
-    if(num1 < 0 || num2 < 0){
-      return true;
-    }
-    return false;
+    return num1 < 0 || num2 < 0;
 }
 
 public boolean iguaisXorDiferentes(short num1, short num2, short num3, short num4){
    
-   if (num1 == num3 ^ num2 != num4) {
-    return true;
-   }
-   return false;
+   return num1 == num3 ^ num2 != num4 ; 
  }
 
   public int start(){
