@@ -60,26 +60,37 @@ public class calculadora extends calculos{
     return -1;
     }
 
-public boolean ambosPositivos(long num1, long num2){
-   return;
-  //return (num1 > 0) && (num2 > 0);
+public boolean ambosPositivos(long num1, long num2){  
+    if (num1 > 0 && num2 > 0) {
+      return true;
+    }
+    return false;
   }
 
 public boolean opostoE(boolean val1, boolean val2){
-	return;
-  //return (!val1 && !val2);
+	 
+    if (!val1){
+      if(!val2){
+        return true;
+      }
+    }
+
+    return false;
   }
 
 public boolean algumNegativo(byte num1, byte num2){
-   /*if(num1 < 0 || num2 < 0){
+    if(num1 < 0 || num2 < 0){
       return true;
-}*/
-return false;
+    }
+    return false;
 }
 
 public boolean iguaisXorDiferentes(short num1, short num2, short num3, short num4){
-   return;
-   //return ((num1 == num3) ^ (num2 != num4));
+   
+   if (num1 == num3 ^ num2 != num4) {
+    return true;
+   }
+   return false;
  }
 
   public int start(){
@@ -91,8 +102,8 @@ public boolean iguaisXorDiferentes(short num1, short num2, short num3, short num
       calc = new calculadora ("Casio", codigo, ehCalculadora);
       double num1, num2;
       int opcao;
-      double total;
-      total = 0.0d;
+      long total;
+      total = 0l;
       do {
          print "Escolha a operacao:\n";
          print "1 - soma\n";

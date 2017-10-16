@@ -451,14 +451,14 @@ void atribstat():
 {
 }
 {
-    lvalue() <ASSIGN> ( alocexpression() | LOOKAHEAD(3) expression() | LOOKAHEAD(3) methodcall() | LOOKAHEAD(3) logicexpression())
+    lvalue() <ASSIGN> ( alocexpression() | LOOKAHEAD(3) expression() | LOOKAHEAD(3) methodcall())
 }
 
 void printstat():
 {
 }
 {
-    <PRINT> (LOOKAHEAD(3) expression() | logicexpression())
+    <PRINT> expression()
 }
 
 void readstat():
@@ -473,7 +473,7 @@ void returnstat():
 {
 }
 {  
-    <RETURN> [LOOKAHEAD(3) expression() | logicexpression()]
+    <RETURN> [expression()]
 }
 
 
@@ -488,7 +488,7 @@ void ifstat():
 {
 }
 {
-    <IF> <LPAREN> (LOOKAHEAD(3) expression() | logicexpression()) <RPAREN> statement()
+    <IF> <LPAREN> logicexpression() <RPAREN> statement()
     [LOOKAHEAD(2) <ELSE> statement()]
 }
 
@@ -499,7 +499,7 @@ void forstat():
 }
 {
     <FOR> <LPAREN> [atribstat()] <SEMICOLON>
-                   [LOOKAHEAD(3) expression() | logicexpression()] <SEMICOLON>
+                   [LOOKAHEAD(3) expression()] <SEMICOLON>
                    [atribstat()] <RPAREN>
                     statement()
 }
@@ -509,7 +509,7 @@ void whilestat():
 	
 }
 {
-	<WHILE> <LPAREN> (LOOKAHEAD(3) expression() | logicexpression()) <RPAREN> statement()
+	<WHILE> <LPAREN>  expression() <RPAREN> statement()
 }
 
 void dowhilestat():
@@ -517,7 +517,7 @@ void dowhilestat():
 	
 }
 {
-	<DO> statement() <LPAREN> (LOOKAHEAD(3) expression() | logicexpression())<RPAREN>
+	<DO> statement() <LPAREN> expression() <RPAREN>
 }
 
 void switchstat():
@@ -569,42 +569,16 @@ void expression() :
 {
 }
 {	
-    numexpr() [( <LT> | <GT> | <LE> | <GE> | <EQ> | <NEQ>) numexpr()]
+   numexpr() [( <LT> | <GT> | <LE> | <GE> | <EQ> | <NEQ> ) numexpr()]
 }
 
-void logicexpression():
-{
-	
-}
-{
-	logicterm() ((<OR> | <XOR>) logicterm())*
-}
-
-void logicterm():
+void logicexpression() :
 {
 }
 {
-    logicunaryexpr() ((<AND>) logicunaryexpr())*
+  [<NOT>] expression() [( <AND> | <XOR> | <OR> | <NOT>) expression()]
 }
 
-void logicunaryexpr() :
-{
-}
-{
-   [<NOT>] logicfactor()
-}
-
-void logicfactor():
-{
-	
-}
-{
-	(
-	<boolean_constant> |
-       LOOKAHEAD(3) methodcall() |
-       <IDENT> |
-       <LPAREN> expression() <RPAREN>)
-}
 
 void numexpr():
 {
@@ -626,9 +600,6 @@ void unaryexpr() :
 {
    [(<PLUS> | <MINUS>)] factor()
 }
-
-
-
 
 void factor():
 {
