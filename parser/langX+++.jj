@@ -191,7 +191,7 @@ TOKEN :
 |
   < double_constant: (<int_constant> "." ( <int_constant> ( ("e" | "E")? ("-")? <int_constant> )? )? | (<int_constant>)? "." <int_constant> (("e" | "E")? ("-")? <int_constant>)? ) ("D" | "d")? >
 | 
-  < byte_constant: ("-")? (<DIGIT> (<DIGIT>)? | ( ["1"]["0"-"1"] ["0"-"9"]) (["1"] ["0"-"2"] ["0"-"7"])) >
+  < byte_constant: ("-")? (<DIGIT> (<DIGIT>)? | ( ["1"]["0"-"1"] ["0"-"9"]) (["1"] ["0"-"2"] ["0"-"7"])) ("b" | "B") >
 |
   < short_constant: ("-")? ((<DIGIT> (<DIGIT>)? (<DIGIT>)? (<DIGIT>)?) | 
                             (["1"-"2"] <DIGIT> <DIGIT> <DIGIT> <DIGIT>) |
@@ -451,14 +451,14 @@ void atribstat():
 {
 }
 {
-    lvalue() <ASSIGN> ( alocexpression() | LOOKAHEAD(3) expression() | LOOKAHEAD(3) methodcall() | LOOKAHEAD(3) logicexpression())
+    lvalue() <ASSIGN> ( alocexpression() | LOOKAHEAD(3) logicexpression() | LOOKAHEAD(3) methodcall())
 }
 
 void printstat():
 {
 }
 {
-    <PRINT> (LOOKAHEAD(3) expression() | logicexpression())
+    <PRINT> logicexpression()
 }
 
 void readstat():
@@ -473,7 +473,7 @@ void returnstat():
 {
 }
 {  
-    <RETURN> [LOOKAHEAD(3) expression() | logicexpression()]
+    <RETURN> [logicexpression()]
 }
 
 
@@ -488,7 +488,7 @@ void ifstat():
 {
 }
 {
-    <IF> <LPAREN> (LOOKAHEAD(3) expression() | logicexpression()) <RPAREN> statement()
+    <IF> <LPAREN> logicexpression() <RPAREN> statement()
     [LOOKAHEAD(2) <ELSE> statement()]
 }
 
@@ -499,7 +499,7 @@ void forstat():
 }
 {
     <FOR> <LPAREN> [atribstat()] <SEMICOLON>
-                   [LOOKAHEAD(3) expression() | logicexpression()] <SEMICOLON>
+                   [LOOKAHEAD(3) logicexpression()] <SEMICOLON>
                    [atribstat()] <RPAREN>
                     statement()
 }
@@ -509,7 +509,7 @@ void whilestat():
 	
 }
 {
-	<WHILE> <LPAREN> (LOOKAHEAD(3) expression() | logicexpression()) <RPAREN> statement()
+	<WHILE> <LPAREN>  logicexpression() <RPAREN> statement()
 }
 
 void dowhilestat():
@@ -517,7 +517,7 @@ void dowhilestat():
 	
 }
 {
-	<DO> statement() <LPAREN> (LOOKAHEAD(3) expression() | logicexpression())<RPAREN>
+	<DO> statement() <LPAREN> logicexpression() <RPAREN>
 }
 
 void switchstat():
@@ -548,7 +548,7 @@ void lvalue() :
 }
 {
    <IDENT> (
-           <LBRACKET> expression() <RBRACKET> |
+           <LBRACKET> logicexpression() <RBRACKET> |
            <DOT> <IDENT> [<LPAREN> arglist() <RPAREN>]
          )*
 }
@@ -564,46 +564,19 @@ void alocexpression() :
           )
 } 
 
+void logicexpression() :
+{
+}
+{
+  [<NOT>] expression() [( <XOR> | <OR> | <AND> | <NOT>) expression()]
+}
+
 
 void expression() :
 {
 }
 {	
-    numexpr() [( <LT> | <GT> | <LE> | <GE> | <EQ> | <NEQ>) numexpr()]
-}
-
-void logicexpression():
-{
-	
-}
-{
-	logicterm() ((<OR> | <XOR>) logicterm())*
-}
-
-void logicterm():
-{
-}
-{
-    logicunaryexpr() ((<AND>) logicunaryexpr())*
-}
-
-void logicunaryexpr() :
-{
-}
-{
-   [<NOT>] logicfactor()
-}
-
-void logicfactor():
-{
-	
-}
-{
-	(
-	<boolean_constant> |
-       LOOKAHEAD(3) methodcall() |
-       <IDENT> |
-       <LPAREN> expression() <RPAREN>)
+   numexpr() [( <LT> | <GT> | <LE> | <GE> | <EQ> | <NEQ> ) numexpr()]
 }
 
 void numexpr():
@@ -626,9 +599,6 @@ void unaryexpr() :
 {
    [(<PLUS> | <MINUS>)] factor()
 }
-
-
-
 
 void factor():
 {
