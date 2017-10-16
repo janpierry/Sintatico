@@ -201,7 +201,7 @@ TOKEN :
                             (["3"] ["2"] ["7"] ["6"] ["0"-"7"])
   ) >
 |
-  < long_constant: <DIGIT> (<DIGIT>)* ("l" | "L") >
+  < long_constant: <DIGIT> (<DIGIT>)* ("l" | "L")? >
 |
   < float_constant: (<int_constant> "." ( <int_constant> ( ("e" | "E")? ("-")? <int_constant> )? )? | (<int_constant>)? "." <int_constant> (("e" | "E")? ("-")? <int_constant>)? ) ("F" | "f")? >
 
@@ -211,7 +211,7 @@ TOKEN :
 
 TOKEN :
 {
-  < IDENT: <LETTER> (<LETTER>|<DIGIT>)* >
+  < IDENT: <LETTER> (<LETTER> | <DIGIT> | "_")* >
 |
   < #LETTER:["A"-"Z","a"-"z"] >
 |
@@ -334,7 +334,7 @@ void classdecl():
 {
 }
 {
-   [<PUBLIC> | <PRIVATE> | <PROTECTED>] <CLASS>  <IDENT> [ <EXTENDS> <IDENT> ] classbody() 
+   [<PUBLIC> | <PRIVATE> | <PROTECTED>] [<FINAL>] <CLASS>  <IDENT> [ <EXTENDS> <IDENT> ] classbody() 
 }
 
 void classbody():

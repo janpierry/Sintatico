@@ -7,6 +7,8 @@ Esse programa implementa uma calculadora
 public class calculadora extends calculos{
    protected string marca;
    private final char codigo;
+   private int diaEntrega;
+   diaEntrega = 21;
 
  public  constructor (string a, char b, boolean ehCientifica) {
       marca = a;
@@ -37,7 +39,7 @@ public class calculadora extends calculos{
   public int comparacao (double num1, double num2) { // compara os dois numeros e imprime o resultado
    
     if (num1 != num2){
-      double maiorNumero, menorNumero;
+      double maiorNumero, menorNumero, listaInutil[];
       maiorNumero = 0.0d;
       menorNumero = 0.0d;
       int i;
