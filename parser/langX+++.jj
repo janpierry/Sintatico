@@ -191,7 +191,7 @@ TOKEN :
 |
   < double_constant: (<int_constant> "." ( <int_constant> ( ("e" | "E")? ("-")? <int_constant> )? )? | (<int_constant>)? "." <int_constant> (("e" | "E")? ("-")? <int_constant>)? ) ("D" | "d")? >
 | 
-  < byte_constant: ("-")? (<DIGIT> (<DIGIT>)? | ( ["1"]["0"-"1"] ["0"-"9"]) (["1"] ["0"-"2"] ["0"-"7"])) ("b" | "B") >
+  < byte_constant: ("-")? (<DIGIT> (<DIGIT>)? | ( ["1"]["0"-"1"] ["0"-"9"]) (["1"] ["0"-"2"] ["0"-"7"])) >
 |
   < short_constant: ("-")? ((<DIGIT> (<DIGIT>)? (<DIGIT>)? (<DIGIT>)?) | 
                             (["1"-"2"] <DIGIT> <DIGIT> <DIGIT> <DIGIT>) |
@@ -568,7 +568,7 @@ void logicexpression() :
 {
 }
 {
-  [<NOT>] expression() [( <XOR> | <OR> | <AND> | <NOT>) expression()]
+  [<NOT>] expression() (( <XOR> | <OR> | <AND>) [<NOT>] expression())*
 }
 
 
